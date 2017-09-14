@@ -1,0 +1,25 @@
+<app-menu></app-menu>
+<div class="container">
+    <h1>Hi {{currentUser.firstName}}!</h1>
+    <p>You're logged in with Angular 2 and Webpack!!</p>
+    <h3>All registered users:</h3>
+        <div *ngFor="let user of users">
+             
+        <md-card  class="user" >
+
+	        <md-card-title>
+	        <span md-headline>{{user.username}}</span>
+	        </md-card-title>
+	        <md-card-content>
+	          <p>
+	           ({{user.firstName}} {{user.lastName}})
+	          </p>
+	        </md-card-content>
+	        <md-card-footer>
+	 			<a (click)="deleteUser(user.id)">Delete</a>
+	        </md-card-footer>
+    	</md-card>
+            
+        </div>
+  
+</div>
