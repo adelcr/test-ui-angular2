@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { PostService } from '../_services/index';
 @Component({
   selector: 'app-post',
@@ -7,6 +7,7 @@ import { PostService } from '../_services/index';
   providers: [PostService]
 })
 export class PostComponent implements OnInit {
+  post: Post;
 	posts:Post[];
   	constructor(private postService: PostService) {
   		this.postService.getPosts().subscribe(posts=>{
@@ -15,6 +16,7 @@ export class PostComponent implements OnInit {
   	}
   	 ngOnInit() {
   }
+ 
 }
 interface Post{
 	id: number;

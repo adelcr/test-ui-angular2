@@ -14,18 +14,19 @@ import { BaseRequestOptions } from '@angular/http';
 
 import { AppComponent }  from './app.component';
 import {uiRouterConfigFn} from './router.conf';
-import {appState} from './states';
+import {statehome, statepost, statelogin, stateregister} from './states';
 
 
 import { AlertComponent } from './_directives/index';
-import { AuthGuard } from './_guards/index';
 import { AlertService, AuthenticationService, UserService, PostService } from './_services/index';
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { MenuComponent } from './menu/menu.component';
 import { PostComponent } from './post/post.component';
+import { SnakbarComponent } from './snakbar/snakbar.component';
 
+let INITIAL_STATES =  [ statehome, statepost, statelogin, stateregister ];
 @NgModule({
     imports: [
         BrowserModule,
@@ -34,10 +35,10 @@ import { PostComponent } from './post/post.component';
         MaterialModule,
         BrowserAnimationsModule,
         UIRouterModule.forRoot({ 
-                      states: appState,
-                      useHash: true,
-                      config: uiRouterConfigFn
-                    })
+          states: INITIAL_STATES,
+          useHash: true,
+          config: uiRouterConfigFn
+        })
     ],
     declarations: [
         AppComponent,
@@ -46,10 +47,10 @@ import { PostComponent } from './post/post.component';
         LoginComponent,
         RegisterComponent,
         MenuComponent,
-        PostComponent
+        PostComponent,
+        SnakbarComponent
     ],
     providers: [
-        AuthGuard,
         AlertService,
         AuthenticationService,
         UserService,

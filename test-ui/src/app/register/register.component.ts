@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { StateService } from '@uirouter/angular';
 import { AlertService, UserService } from '../_services/index';
+import { MdSnackBar } from '@angular/material';
 
 @Component({
     moduleId: module.id.toString(),
@@ -13,9 +13,11 @@ export class RegisterComponent {
     loading = false;
 
     constructor(
-        private router: Router,
+        private state: StateService,
         private userService: UserService,
-        private alertService: AlertService) { }
+        private alertService: AlertService,
+        public snackBar: MdSnackBar) {
+         }
 
     register() {
         this.loading = true;
@@ -23,10 +25,10 @@ export class RegisterComponent {
             .subscribe(
                 data => {
                     this.alertService.success('Registration successful', true);
-                    this.router.navigate(['/login']);
+                      return this.state.go("login");
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.snackBar.open(error);
                     this.loading = false;
                 });
     }

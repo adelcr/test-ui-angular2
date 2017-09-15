@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import {StateService,Transition} from '@uirouter/angular';
 import { AlertService, AuthenticationService } from '../_services/index';
+import { MdSnackBar } from '@angular/material';
 
 @Component({
     moduleId: module.id.toString(),
@@ -14,17 +15,22 @@ export class LoginComponent implements OnInit {
     returnUrl: string;
 
     constructor(
-        private route: ActivatedRoute,
-        private router: Router,
+        private state: StateService,
+        private transition:Transition,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService) { }
+        private alertService: AlertService,
+        public snackBar: MdSnackBar
+        ) { 
+}
 
     ngOnInit() {
         // reset login status
-        this.authenticationService.logout();
 
+        this.authenticationService.logout();
+        var parms= this.transition.params();
+        console.log(this.state.params);
         // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['post'] || '/';
+     
     }
 
     login() {
@@ -32,10 +38,10 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(
                 data => {
-                    this.router.navigate([this.returnUrl]);
+                    this.state.go('home');
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.snackBar.open(error);
                     this.loading = false;
                 });
     }

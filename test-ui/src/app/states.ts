@@ -2,16 +2,14 @@ import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { PostComponent } from './post/index';
-import { AuthGuard } from './_guards/index';
-import {Transition} from "@uirouter/angular";
+import {Transition} from "ui-router-ng2";
 
-export const appState = [
-{ name: 'home', url: '/home',  component: HomeComponent ,canActivate: [AuthGuard]}, 
 
-{ name: 'post', url: '/post',  component: PostComponent ,canActivate: [AuthGuard]},
+export let statehome= { name: 'home', url: '/home',  component: HomeComponent }
 
- { name: 'login', url: '/login',  component: LoginComponent },
+export let statepost= { name: 'post', url: '/post',  component: PostComponent }
 
- { name: 'register', url: '/register',  component: RegisterComponent }
+export let statelogin= { name: 'login', url: '/login',  component: LoginComponent  }
 
-];
+export let stateregister= { name: 'register', url: '/register',  component: RegisterComponent }
+

@@ -12,11 +12,11 @@
 	        </md-card-title>
 	        <md-card-content>
 	          <p>
-	           ({{user.firstName}} {{user.lastName}})
+	           s{{user.name}} 
 	          </p>
 	        </md-card-content>
 	        <md-card-footer>
-	 			<a (click)="deleteUser(user.id)">Delete</a>
+	 			<a md-button (click)="deleteUser(user.id)">Delete</a>
 	        </md-card-footer>
     	</md-card>
             
